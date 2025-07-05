@@ -366,7 +366,7 @@ this.setVisible(false);
 new recepit(bookingId, movieName, theatreName, showTime, ticketsText, totalPrice, showDate).setVisible(true);
 
 // لو لديك معرف الحجز (bookingId) متوفر، تمرره كذلك
-new recepit(bookingId, movieName, theatreName, showTime, ticketsText, totalPrice, showDate).setVisible(true);
+//new recepit(bookingId, movieName, theatreName, showTime, ticketsText, totalPrice, showDate).setVisible(true);
 
             System.out.println("Booking successfully recorded in 'bookings' table and tickets updated in 'movies_inventory'.");
 //        } else {

@@ -240,9 +240,9 @@ private int bookingId;
 // تعطيل الأزرار لمنع النقر المتعدد أثناء العملية
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
-        myStatusLabel.setText("جاري معالجة طلب الحجز... الرجاء الانتظار."); // عرض رسالة حالة
+        myStatusLabel.setText("Processing your booking request... please wait."); // عرض رسالة حالة
 
-        logger.info("بدء عملية حجز التذاكر في الخلفية."); // تسجيل بدء العملية
+        logger.info("The ticket booking process has started in the background."); // تسجيل بدء العملية
 
         // إنشاء وتشغيل SwingWorker
         SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
@@ -280,8 +280,8 @@ private int bookingId;
                 // بعد انتهاء مهمة الخلفية (doInBackground).
                 try {
 //                    get(); // للتحقق مما إذا كان هناك أي استثناءات في doInBackground
-                   myStatusLabel.setText("تم الحجز بنجاح!"); // تحديث رسالة الحالة
-                    JOptionPane.showMessageDialog(recepit.this, "تم الحجز بنجاح!");
+                   myStatusLabel.setText("Booking successful!"); // تحديث رسالة الحالة
+                    JOptionPane.showMessageDialog(recepit.this, "Booking successful!");
 
                     // الانتقال إلى الواجهة التالية بعد الانتهاء
                     recepit.this.setVisible(false);
@@ -294,9 +294,9 @@ private int bookingId;
 //                    logger.warning("المهمة الخلفية تم مقاطعتها: " + ex.getMessage());
 //                } 
                 catch (Exception ex) {
-                    myStatusLabel.setText("فشل الحجز: " + ex.getMessage());
-                    JOptionPane.showMessageDialog(recepit.this, "فشل الحجز: " + ex.getMessage(), "خطأ", JOptionPane.ERROR_MESSAGE);
-                    logger.severe("فشل مهمة الحجز الخلفية: " + ex.getMessage());
+                    myStatusLabel.setText("Booking failed: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(recepit.this, "Booking failed: " + ex.getMessage(), "خطأ", JOptionPane.ERROR_MESSAGE);
+                    logger.severe("Failed to complete the background booking task: " + ex.getMessage());
                 } finally {
                     // إعادة تمكين الأزرار بغض النظر عن النتيجة
                     jButton1.setEnabled(true);
@@ -338,7 +338,7 @@ private int bookingId;
 
         ResultSet rs = selectStmt.executeQuery();
         if (!rs.next()) {
-            throw new SQLException("لم يتم العثور على الحجز المطلوب.");
+            throw new SQLException("The requested reservation was not found.");
         }
 
         int showId = rs.getInt("show_id");
@@ -360,8 +360,8 @@ private int bookingId;
         // 5. حفظ التغييرات
         conn.commit();
 
-        myStatusLabel.setText("تم إلغاء الحجز بنجاح.");
-        JOptionPane.showMessageDialog(this, "تم إلغاء الحجز واسترجاع التذاكر بنجاح!");
+        myStatusLabel.setText("The reservation has been successfully canceled.");
+        JOptionPane.showMessageDialog(this, "The booking has been successfully canceled and the tickets have been refunded!");
 
         this.setVisible(false);
         new CANCEL().setVisible(true);
@@ -374,8 +374,8 @@ private int bookingId;
         } catch (SQLException e2) {
             e2.printStackTrace();
         }
-        myStatusLabel.setText("فشل الإلغاء: " + ex.getMessage());
-        JOptionPane.showMessageDialog(this, "فشل إلغاء الحجز: " + ex.getMessage(), "خطأ", JOptionPane.ERROR_MESSAGE);
+        myStatusLabel.setText("Cancellation failed: " + ex.getMessage());
+        JOptionPane.showMessageDialog(this, "Failed to cancel the reservation: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         ex.printStackTrace();
     } finally {
         try { if (selectStmt != null) selectStmt.close(); } catch (Exception e) {}
