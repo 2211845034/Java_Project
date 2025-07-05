@@ -1,6 +1,13 @@
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javaapplication4.JavaApplication4; 
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.SimpleFormatter;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,6 +16,7 @@ import javaapplication4.JavaApplication4;
 
 
 public class login extends javax.swing.JFrame {
+      private static final Logger logger = Logger.getLogger(login.class.getName());
 
     /**
      * Creates new form login
@@ -286,6 +294,40 @@ this.setVisible(false);    new register().setVisible(true);        // TODO add y
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        try {
+            // تحديد مسار مجلد الـ logs داخل مجلد عمل التطبيق
+            // هذا يعني أنه إذا كان ملف JAR الخاص بك موجودًا في C:/my_app/my_app.jar
+            // فإن ملف الـ log سيكون في C:/my_app/logs/application.log
+            String currentWorkingDir = System.getProperty("user.dir");
+           String logFilePath = Paths.get(currentWorkingDir, "application.log").toString();
+            // التأكد من إنشاء مجلد الـ logs إذا لم يكن موجودًا
+//            Files.createDirectories(Paths.get(logDirectory));
+
+            // تهيئة FileHandler لكتابة الـ logs إلى الملف
+            // (مسار الملف، الحد الأقصى لحجم الملف بالبايت، عدد الملفات للدوران، إضافة للملف الحالي)
+            FileHandler fh = new FileHandler(logFilePath, 50000, 1, true); 
+            fh.setFormatter(new SimpleFormatter()); // تحديد صيغة بسيطة للـ log
+
+            // الحصول على الـ Root Logger وإضافة الـ FileHandler إليه
+            // هذا يضمن أن جميع الـ loggers في تطبيقك ستكتب إلى هذا الملف
+            Logger rootLogger = Logger.getLogger(""); 
+            rootLogger.addHandler(fh);
+            rootLogger.setLevel(Level.INFO); // تعيين مستوى الـ root logger إلى INFO
+
+            logger.info("File logging initialized successfully to: " + logFilePath);
+
+        } catch (IOException e) {
+            // في حال فشلت تهيئة الـ logger، نطبع الخطأ على الـ Console
+            System.err.println("Error initializing file logger: " + e.getMessage());
+            e.printStackTrace();
+        }
+        // --- END LOGGER INITIALIZATION ---
+
+        /* Set the Nimbus look and feel */
+        // ... (بقية كود تهيئة Look and Feel في دالة main) ...
+
+        /* Create and display the initial form */
+      
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -313,6 +355,7 @@ this.setVisible(false);    new register().setVisible(true);        // TODO add y
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new login().setVisible(true);
+                 logger.info("Application started. Displaying initial form.");
             }
         });
     }

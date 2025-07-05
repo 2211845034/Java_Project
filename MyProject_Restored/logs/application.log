@@ -1,0 +1,18 @@
+Jul 06, 2025 1:01:15 AM login main
+INFO: File logging initialized successfully to: C:\Users\SOSO\Desktop\السيم_السابع\Java\Java_Project\MyProject_Restored\logs\application.log
+Jul 06, 2025 1:01:16 AM login$3 run
+INFO: Application started. Displaying initial form.
+Jul 06, 2025 1:01:43 AM login main
+INFO: File logging initialized successfully to: C:\Users\SOSO\Desktop\السيم_السابع\Java\Java_Project\MyProject_Restored\logs\application.log
+Jul 06, 2025 1:01:43 AM login$3 run
+INFO: Application started. Displaying initial form.
+Jul 06, 2025 1:01:48 AM register <init>
+INFO: Register form initialized and database connection attempted.
+Jul 06, 2025 1:10:24 AM register jButton1ActionPerformed
+INFO: Sign Up button clicked. Attempting to register user: 
+Jul 06, 2025 1:10:28 AM register jButton1ActionPerformed
+INFO: Sign Up button clicked. Attempting to register user: 
+Jul 06, 2025 1:10:31 AM register jButton1ActionPerformed
+INFO: Sign Up button clicked. Attempting to register user: 
+Jul 06, 2025 1:10:47 AM recepit jButton1ActionPerformed
+INFO: The ticket booking process has started in the background.

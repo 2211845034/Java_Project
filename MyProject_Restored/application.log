@@ -1,0 +1,8 @@
+Jul 06, 2025 1:09:00 AM login main
+INFO: File logging initialized successfully to: C:\Users\SOSO\Desktop\السيم_السابع\Java\Java_Project\MyProject_Restored\application.log
+Jul 06, 2025 1:09:01 AM login$3 run
+INFO: Application started. Displaying initial form.
+Jul 06, 2025 1:09:06 AM register <init>
+INFO: Register form initialized and database connection attempted.
+Jul 06, 2025 1:09:38 AM register jButton1ActionPerformed
+INFO: Sign Up button clicked. Attempting to register user:   
